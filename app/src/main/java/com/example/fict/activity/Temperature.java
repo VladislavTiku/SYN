@@ -1,4 +1,4 @@
-package com.example.fict;
+package com.example.fict.activity;
 
 import android.annotation.SuppressLint;
 import android.support.v4.app.Fragment;
@@ -10,20 +10,27 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.fict.Fragments.Day_fragment;
-import com.example.fict.Fragments.Month_fragment;
-import com.example.fict.Fragments.Week_fragment;
-import com.example.fict.Fragments.Year_fragment;
+import com.example.fict.R;
+import com.example.fict.fragments.Day_fragment;
+import com.example.fict.fragments.Month_fragment;
+import com.example.fict.fragments.Week_fragment;
+import com.example.fict.fragments.Year_fragment;
 
-public class Light extends AppCompatActivity {
+import java.util.Date;
+
+import static com.example.fict.MainActivity.getTEMPEARTURE;
+
+public class Temperature extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.light);
-        TextView textView = findViewById(R.id.Audience);
-
-
+        setContentView(R.layout.activity_temperature);
+        TextView textView = findViewById(R.id.textView5);
+        Date date = new Date();
+        TextView textView1 = findViewById(R.id.Date);
+        textView1.setText(date.toString());
+        textView.setText(getTEMPEARTURE());
     }
     @SuppressLint("ShowToast")
     public void Change(View view){

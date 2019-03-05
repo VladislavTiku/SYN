@@ -13,8 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Gas"></activity>
-        <activity android:name=".Light" />
+        <activity android:name=".activity.Temperature" />
+        <activity android:name=".activity.Gas" />
+        <activity android:name=".activity.Light" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Humidity" />
+        <activity android:name=".activity.Humidity" />
     </application>
 
 </manifest>

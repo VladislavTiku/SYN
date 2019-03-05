@@ -1,7 +1,9 @@
-package com.example.fict;
+package com.example.fict.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.fict.R;
 
 public class Gas extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.fict;
+package com.example.fict.activity;
 
 import android.annotation.SuppressLint;
 import android.support.v4.app.Fragment;
@@ -10,12 +10,15 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.fict.Fragments.Day_fragment;
-import com.example.fict.Fragments.Month_fragment;
-import com.example.fict.Fragments.Week_fragment;
-import com.example.fict.Fragments.Year_fragment;
+import com.example.fict.R;
+import com.example.fict.fragments.Day_fragment;
+import com.example.fict.fragments.Month_fragment;
+import com.example.fict.fragments.Week_fragment;
+import com.example.fict.fragments.Year_fragment;
 
 import java.util.Date;
+
+import static com.example.fict.MainActivity.getHUMIDITY;
 
 public class Humidity extends AppCompatActivity {
 
@@ -26,6 +29,8 @@ public class Humidity extends AppCompatActivity {
         Date date = new Date();
         TextView textView = findViewById(R.id.Date);
         textView.setText(date.toString());
+        TextView textView1 = findViewById(R.id.textView5);
+        textView1.setText(getHUMIDITY());
 
     }
 

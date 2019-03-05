@@ -11,48 +11,176 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-import java.io.IOException;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import okhttp3.ResponseBody;
+import com.example.fict.activity.Gas;
+import com.example.fict.activity.Humidity;
+import com.example.fict.activity.Light;
+import com.example.fict.activity.Temperature;
 
-public class MainActivity extends AppCompatActivity {
-    String RESPONES = null;
+
+public class MainActivity extends AppCompatActivity  {
+    private static final String TAG = "myLogs";
+
+    public TextView MainViewBord;
+
+
+
+    private static  String TEMPEARTURE;
+    private static String LOGDATE;
+    private static String MOVE;
+    private static String LIGHT ;
+    private static String HUMIDITY ;
+
+    private ImageButton humidity;
+    ImageButton light;
+    ImageButton gas;
+    ImageButton temperature;
+    ImageButton fire;
+    ImageButton motion;
+
+
+
+
+
+    public static String getHUMIDITY() {
+        return HUMIDITY; }
+    public static String getMOVE() {
+        return MOVE;
+    }
+    public static String getTEMPEARTURE() {
+        return TEMPEARTURE;
+    }
+
+    public static String getLIGHT() { return LIGHT; }
+    public static String getLOGDATE() { return LOGDATE;  }
+
+    public static void setHUMIDITY(String HUMIDITY) { MainActivity.HUMIDITY = HUMIDITY; }
+    public static void setMOVE(String MOVE) {
+        MainActivity.MOVE = MOVE;
+    }
+
+    public static void setTEMPEARTURE(String TEMPEARTURE) { MainActivity.TEMPEARTURE = TEMPEARTURE; }
+    public static void setLOGDATE(String LOGDATE) {
+        MainActivity.LOGDATE = LOGDATE;
+    }
+    public static void setLIGHT(String LIGHT) {
+        MainActivity.LIGHT = LIGHT;
+    }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        new getRespounes().execute();
         Animation();
-        TextView textView = findViewById(R.id.get);
-            textView.setText("--");
+
+        MainViewBord = findViewById(R.id.get);
+        MainViewBord.setText("--");
+
     }
 
 
-    public void Animation(){
-        final Animation animAlpha = AnimationUtils.loadAnimation(this, R.anim.alpha);
-        final Animation animAlpha1 = AnimationUtils.loadAnimation(this, R.anim.alpha);
-        final Animation animAlpha2 = AnimationUtils.loadAnimation(this, R.anim.alpha);
-        final Animation animAlpha3 = AnimationUtils.loadAnimation(this, R.anim.alpha);
-        final Animation animAlpha4 = AnimationUtils.loadAnimation(this, R.anim.alpha);
-        final Animation animAlpha5 = AnimationUtils.loadAnimation(this, R.anim.alpha);
 
-        ImageButton btnAlpha = findViewById(R.id.Humidity);
-        btnAlpha.setOnClickListener(new Button.OnClickListener(){
+/*
+{@param #getRespounes}
+ */
+
+/*
+Смотреть asynctask lifecycle схема - - - - - - - (https://www.google.com/url?sa=i&source=images&cd=
+&cad=rja&uact=8&ved=2ahUKEwj5heCtzevgAhVLxaYKHe4BAtoQjRx6BAgBEAQ&url=http%3A%2F%2Fprogrammerguru.com%2
+Fandroid-tutorial%2Fwhat-is-asynctask-in-android%2F&psig=AOvVaw1ZcMtzsL_f1dtHIjtYYtJE&ust=1551896026619499)
+ */
+
+    @SuppressLint("StaticFieldLeak")
+    class getRespounes extends AsyncTask<Void,Integer,Void> {
+        Respones respones = new Respones();
+        Parsing parsing = new Parsing();
+
+
+        //1. Отправить запрос  получить Json
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            respones.Resp(1,1);
+
+
+
+        }
+        // 3. Показать температтуру
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            setTEMPEARTURE(parsing.getTemperatureLastValue());
+            setLIGHT(parsing.getLightLastValue());
+            setHUMIDITY(parsing.getHumidityLastValue());
+
+        }
+
+        // Что то делать при отправке запроса
+        //Пока нечего, потому что запрос простой
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+
+        }
+        // 2. Поместить ответ @RESPONES c класса
+        // запроса на сервер @Respones в класс парсинга @Parsing
+        @Override
+        protected Void doInBackground(Void... voids) {
+            parsing.setRESPONES(respones.getRESPONES());
+            return null;
+        }
+    }
+
+
+// FIXME: 05.03.2019 
+
+/*
+This method provides that i'm cancer
+ */
+void getDefoltIconsForButtons(){
+        humidity.setImageResource(R.drawable.huminity_background);
+        light.setImageResource(R.drawable.light_background);
+        temperature.setImageResource(R.drawable.temperature_background);
+        gas.setImageResource(R.drawable.gas_background);
+        fire.setImageResource(R.drawable.fire_background);
+        motion.setImageResource(R.drawable.motion_background);
+}
+
+
+
+
+
+    public void Animation(){
+        final Animation onClickAnimation = AnimationUtils.loadAnimation(this, R.anim.alpha);
+
+        humidity = findViewById(R.id.Humidity);
+        light = findViewById(R.id.Light);
+        temperature= findViewById(R.id.Temperature);
+        gas = findViewById(R.id.Gas);
+        fire = findViewById(R.id.Fire);
+        motion = findViewById(R.id.Move);
+
+
+/*
+                        Humidity
+ */
+        humidity.setOnClickListener(new Button.OnClickListener(){
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
-                view.startAnimation(animAlpha);
-                TextView textView = findViewById(R.id.get);
-                textView.setText("96%");
+                view.startAnimation(onClickAnimation);
+                getDefoltIconsForButtons();
+                humidity.setImageResource(R.drawable.himinity_color);
+                MainViewBord.setText(getHUMIDITY());
 
 
             }
 
         });
 
-        btnAlpha.setOnLongClickListener(new View.OnLongClickListener() {
+        humidity.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 Intent intent  = new Intent(MainActivity.this, Humidity.class);
@@ -60,20 +188,28 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-        //----------------------------------------------------------------------------
 
-        ImageButton btnAlpha1 = findViewById(R.id.Light);
-        btnAlpha1.setOnClickListener(new Button.OnClickListener(){
+/*
+                            Light
+ */
+       // Drawable new_imaage = getRespounes().getDra
+        light.setOnClickListener(new Button.OnClickListener(){
+
+
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
-                view.startAnimation(animAlpha1);
-                TextView textView = findViewById(R.id.get);
-                textView.setText("30 lux");
+                view.startAnimation(onClickAnimation);
+                MainViewBord.setText(getLIGHT());
+                getDefoltIconsForButtons();
+                light.setImageResource(R.drawable.light_color);
+
+
+
             }
         });
 
-        btnAlpha1.setOnLongClickListener(new View.OnLongClickListener() {
+        light.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 Intent intent  = new Intent(MainActivity.this, Light.class);
@@ -81,20 +217,22 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-
+//                              Gas
 //---------------------------------------------------------------------------------------------
 
-        ImageButton btnAlpha2 = findViewById(R.id.Smoke);
-        btnAlpha2.setOnClickListener(new Button.OnClickListener(){
+        gas.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View view) {
-                view.startAnimation(animAlpha2);
-                TextView textView = findViewById(R.id.get);
-                textView.setText("9%");
+                view.startAnimation(onClickAnimation);
+                getDefoltIconsForButtons();
+                gas.setImageResource(R.drawable.gas_color);
+                MainViewBord.setText("Error");
+
+                Toast.makeText(getApplicationContext(),"This sensor is in development",Toast.LENGTH_SHORT).show();
 
             }
         });
-        btnAlpha2.setOnLongClickListener(new View.OnLongClickListener() {
+        gas.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 Intent intent  = new Intent(MainActivity.this, Gas.class);
@@ -103,101 +241,65 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ImageButton btnAlpha3 = findViewById(R.id.Temperature);
-        btnAlpha3.setOnClickListener(new Button.OnClickListener(){
+        temperature.setOnClickListener(new Button.OnClickListener(){
+
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
-                view.startAnimation(animAlpha3);
-               // Response("");
-               // Parsing parsing = new Parsing();
-               // parsing.getLastValues(RESPONES,1);
-                TextView textView = findViewById(R.id.get);
-                textView.setText("--");
+                view.startAnimation(onClickAnimation);
+                MainViewBord.setText(getTEMPEARTURE());
+                getDefoltIconsForButtons();
+                temperature.setImageResource(R.drawable.temperature_color);
+
+
             }
         });
-        btnAlpha3.setOnLongClickListener(new View.OnLongClickListener() {
+        temperature.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                Intent intent  = new Intent(MainActivity.this, Humidity.class);
-
+                Intent intent  = new Intent(MainActivity.this, Temperature.class);
                 startActivity(intent);
                 return true;
             }
         });
 
-        ImageButton btnAlpha4 = findViewById(R.id.Snow);
-        btnAlpha4.setOnClickListener(new Button.OnClickListener(){
+        fire.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View view) {
-                view.startAnimation(animAlpha4);
-                TextView textView = findViewById(R.id.get);
-                textView.setText("0%");
+                view.startAnimation(onClickAnimation);
+                getDefoltIconsForButtons();
+                fire.setImageResource(R.drawable.fire_color);
+                MainViewBord.setText("--");
+
             }
         });
-        btnAlpha4.setOnLongClickListener(new View.OnLongClickListener() {
+        fire.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 Intent intent  = new Intent(MainActivity.this, Humidity.class);
-
                 startActivity(intent);
                 return true;
             }
         });
 
-        ImageButton btnAlpha5 = findViewById(R.id.Rain);
-        btnAlpha5.setOnClickListener(new Button.OnClickListener(){
+        motion.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View view) {
-                view.startAnimation(animAlpha5);
-                TextView textView = findViewById(R.id.get);
-                textView.setText("0%");
+                view.startAnimation(onClickAnimation);
+                getDefoltIconsForButtons();
+                motion.setImageResource(R.drawable.motion_color);
+                MainViewBord.setText("Move");
 
             }
         });
-        btnAlpha5.setOnLongClickListener(new View.OnLongClickListener() {
+        motion.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 Intent intent  = new Intent(MainActivity.this, Humidity.class);
-
                 startActivity(intent);
                 return true;
             }
         });
-
-    }
-
-
-
-    @SuppressLint("StaticFieldLeak")
-    public void Response (final  String url) {
-        final AsyncTask connection_error_ = new AsyncTask<Void, Void, ResponseBody>() {
-            @SuppressLint("ShowToast")
-            @Override
-            protected ResponseBody doInBackground(Void... voids) {
-                OkHttpClient client = new OkHttpClient();
-                final Request request = new Request.Builder()
-                        .url(url)
-                        .build();
-                try {
-                    Response response = client.newCall(request).execute();
-                     RESPONES  = response.body().string();
-
-                } catch (final IOException e) {
-                    runOnUiThread(new Runnable() {
-                        @SuppressLint("LongLogTag")
-                        @Override
-                        public void run() {
-                            Toast.makeText(getApplicationContext(), "Oops " + e.getMessage(), Toast.LENGTH_LONG).show();
-                        }
-                    });
-                } catch (final Exception e) {
-                    e.getStackTrace();
-                }
-                return  null;
-            }
-
-        }.execute();
 
     }
 }
