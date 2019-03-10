@@ -161,7 +161,7 @@
 
 
         <fragment
-            android:id="@+id/fragment1"
+            android:id="@+id/fragmentGas"
             android:name="com.example.fict.fragments.Day_fragment"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -174,7 +174,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints"
-            tools:layout="@layout/fragment_day" />
+            tools:layout="@layout/fragment_day"
+            />
+        <lecho.lib.hellocharts.view.LineChartView
+            android:id="@+id/chart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>
