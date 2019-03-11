@@ -170,6 +170,7 @@ void getDefoltIconsForButtons(){
 
 
     /**
+     *
      * Now checking a push button, and in dependency change
      * 1. background
      * 2. MainViewBord
