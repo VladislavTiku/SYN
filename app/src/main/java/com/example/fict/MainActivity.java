@@ -16,13 +16,19 @@ import com.example.fict.activity.Humidity;
 import com.example.fict.activity.Light;
 import com.example.fict.activity.Temperature;
 
-
+/**
+ * @author Vlados
+ *
+ *
+ *
+ *
+ */
 public class MainActivity extends AppCompatActivity  {
+
+
     private static final String TAG = "myLogs";
 
-    public TextView MainViewBord;
-
-
+    public TextView MainViewBord; //TextView for represent a data
 
     private static  String TEMPEARTURE;
     private static String LOGDATE;
@@ -36,6 +42,7 @@ public class MainActivity extends AppCompatActivity  {
     ImageButton temperature;
     ImageButton fire;
     ImageButton motion;
+
 
 
 
@@ -67,38 +74,45 @@ public class MainActivity extends AppCompatActivity  {
     }
 
 
-
+    /**
+     * Called when the activity is first created.
+     * @see getRespounes  method provides a request to the server
+     * Send a request all the time when we're re-creation Activity too
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         new getRespounes().execute();
-        Animation();
+
+        Button_Animation(); // Button animation
+
 
         MainViewBord = findViewById(R.id.get);
         MainViewBord.setText("--");
-
     }
 
 
 
-/*
-{@param #getRespounes}
- */
 
-/*
-Смотреть asynctask lifecycle схема - - - - - - - (https://www.google.com/url?sa=i&source=images&cd=
-&cad=rja&uact=8&ved=2ahUKEwj5heCtzevgAhVLxaYKHe4BAtoQjRx6BAgBEAQ&url=http%3A%2F%2Fprogrammerguru.com%2
-Fandroid-tutorial%2Fwhat-is-asynctask-in-android%2F&psig=AOvVaw1ZcMtzsL_f1dtHIjtYYtJE&ust=1551896026619499)
- */
 
+    /**
+     * @see Respones,Parsing the first one, create two new obejets
+     * OnPreExecude -
+     *
+     *
+     *
+     *
+     */
     @SuppressLint("StaticFieldLeak")
     class getRespounes extends AsyncTask<Void,Integer,Void> {
         Respones respones = new Respones();
         Parsing parsing = new Parsing();
 
 
-        //1. Отправить запрос  получить Json
+        /**
+         *  A send GET request to the server
+         */
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -124,8 +138,9 @@ Fandroid-tutorial%2Fwhat-is-asynctask-in-android%2F&psig=AOvVaw1ZcMtzsL_f1dtHIjt
             super.onProgressUpdate(values);
 
         }
-        // 2. Поместить ответ @RESPONES c класса
-        // запроса на сервер @Respones в класс парсинга @Parsing
+
+
+
         @Override
         protected Void doInBackground(Void... voids) {
             parsing.setRESPONES(respones.getRESPONES());
@@ -152,7 +167,7 @@ void getDefoltIconsForButtons(){
 
 
 
-    public void Animation(){
+    public void Button_Animation(){
         final Animation onClickAnimation = AnimationUtils.loadAnimation(this, R.anim.alpha);
 
         humidity = findViewById(R.id.Humidity);

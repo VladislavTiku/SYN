@@ -9,7 +9,7 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/view_layout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="156dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="25dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,11 +51,11 @@
         <TableRow
             android:id="@+id/Audience_and_dateTableROW"
             android:layout_width="wrap_content"
-            android:layout_height="29dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Gas">
+            app:layout_constraintTop_toBottomOf="@+id/textView5">
 
             <TextView
                 android:id="@+id/Audience"
