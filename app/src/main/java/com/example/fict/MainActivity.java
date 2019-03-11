@@ -149,11 +149,16 @@ public class MainActivity extends AppCompatActivity  {
     }
 
 
-// FIXME: 05.03.2019 
+// FIXME: 05.03.2019
 
-/*
-This method provides that i'm cancer
- */
+    /**
+     * Change icons
+     *
+     * If we're push a on the button like temperature she will has color
+     * icon , all buttons will be reset to background (black icons)
+     *
+     *
+     */
 void getDefoltIconsForButtons(){
         humidity.setImageResource(R.drawable.huminity_background);
         light.setImageResource(R.drawable.light_background);
@@ -164,10 +169,19 @@ void getDefoltIconsForButtons(){
 }
 
 
-
-
-
+    /**
+     * Now checking a push button, and in dependency change
+     * 1. background
+     * 2. MainViewBord
+     * 3. And if will call setOnLongClickListener(), change a activity
+     *
+     *
+     *
+     * For real, all OnLongClickListener() must be into another place
+     * Maybe create new class, i don't know. It's works!
+     */
     public void Button_Animation(){
+        // Find animation in resourses
         final Animation onClickAnimation = AnimationUtils.loadAnimation(this, R.anim.alpha);
 
         humidity = findViewById(R.id.Humidity);
@@ -207,7 +221,6 @@ void getDefoltIconsForButtons(){
 /*
                             Light
  */
-       // Drawable new_imaage = getRespounes().getDra
         light.setOnClickListener(new Button.OnClickListener(){
 
 
@@ -256,6 +269,9 @@ void getDefoltIconsForButtons(){
             }
         });
 
+
+        //              Temperature
+
         temperature.setOnClickListener(new Button.OnClickListener(){
 
             @SuppressLint("SetTextI18n")
@@ -277,7 +293,7 @@ void getDefoltIconsForButtons(){
                 return true;
             }
         });
-
+//                      Fire
         fire.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -296,7 +312,7 @@ void getDefoltIconsForButtons(){
                 return true;
             }
         });
-
+//              Motion
         motion.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View view) {
