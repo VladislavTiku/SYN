@@ -1,20 +1,16 @@
 package com.example.fict.activity;
 
 import android.annotation.SuppressLint;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.fict.R;
-import com.example.fict.fragments.Day_fragment;
-import com.example.fict.fragments.Month_fragment;
-import com.example.fict.fragments.Week_fragment;
-import com.example.fict.fragments.Year_fragment;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.LegendRenderer;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.util.Date;
 
@@ -31,35 +27,46 @@ public class Temperature extends AppCompatActivity {
         TextView textView1 = findViewById(R.id.Date);
         textView1.setText(date.toString());
         textView.setText(getTEMPEARTURE());
+        updateTempGraph();
     }
+
     @SuppressLint("ShowToast")
-    public void Change(View view){
-        Fragment fragment = null;
-        switch (view.getId()){
-            case R.id.day:
-                fragment = new Day_fragment();
-                Toast.makeText(getApplicationContext(),"Open a fragmant 1",Toast.LENGTH_LONG).show();
 
-                break;
-            case R.id.week:
-                fragment = new Week_fragment();
+    public void updateTempGraph() {
 
-                Toast.makeText(getApplicationContext(),"Open a fragmant 2",Toast.LENGTH_LONG).show();
-                break;
-            case R.id.month:
-                fragment = new Month_fragment();
-
-                Toast.makeText(getApplicationContext(),"Open a fragmant 3",Toast.LENGTH_LONG).show();
-                break;
-            case R.id.year:
-                fragment = new Year_fragment();
-                Toast.makeText(getApplicationContext(),"Open a fragmant 4",Toast.LENGTH_LONG).show();
-                break;
-        }
-        FragmentManager fm = getSupportFragmentManager();
-        @SuppressLint("CommitTransaction")
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.fragment1,fragment);
-        ft.commit();
+        // plotting results
+        GraphView graph = findViewById(R.id.graph_temperature);
+        initGraph(graph);
     }
+
+    public void initGraph(GraphView graph) {
+
+        DataPoint[] points = new DataPoint[30];
+        for (int i = 0; i < points.length; i++) {
+            points[i] = new DataPoint(i, i);
+        }
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(points);
+        series.setColor(Color.argb(255, 0, 255, 0));
+        series.setTitle("Temperature");
+
+        graph.getViewport().setXAxisBoundsManual(true);
+        graph.getViewport().setMinX(0);
+        graph.getViewport().setMaxX(7);
+
+        graph.getViewport().setScrollable(true);
+        graph.addSeries(series);
+        graph.getLegendRenderer().setVisible(true);
+        graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
+    }
+
+//    public void MonthButton(View view){
+//        Toast.makeText(this, "btn clicked", 1).show();
+//        GraphView graph = findViewById(R.id.graph_temperature);
+//        graph.getViewport().setYAxisBoundsManual(true);
+//        graph.getViewport().setMinY(0);
+//        graph.getViewport().setMaxY(10);
+//        graph.getViewport().setXAxisBoundsManual(true);
+//        graph.getViewport().setMinX(0);
+//        graph.getViewport().setMaxX(10);
+//    }
 }
