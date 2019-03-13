@@ -98,8 +98,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="217dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="1dp"
-        app:layout_constraintBottom_toTopOf="@+id/frag"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -130,8 +128,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="Change"
             android:background="@android:color/transparent"
+            android:onClick="Change"
             android:text="@string/month"
             tools:ignore="ButtonStyle" />
 
@@ -142,43 +140,23 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:text="@string/year"
             android:onClick="Change"
+            android:text="@string/year"
             tools:ignore="ButtonStyle" />
+
     </TableRow>
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/frag"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <com.jjoe64.graphview.GraphView
+        android:id="@+id/graph_humidity"
+        android:layout_width="339dp"
+        android:layout_height="193dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.41"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tableRow"
-        tools:ignore="MissingConstraints">
-
-
-        <fragment
-            android:id="@+id/fragment1"
-            android:name="com.example.fict.fragments.Day_fragment"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="5dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints"
-            tools:layout="@layout/fragment_day" />
-
-    </android.support.constraint.ConstraintLayout>
+        app:layout_constraintTop_toBottomOf="@+id/tableRow" />
 
 
 </android.support.constraint.ConstraintLayout>
