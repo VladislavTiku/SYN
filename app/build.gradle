@@ -5,7 +5,7 @@ android {
     buildToolsVersion = '28.0.3'
     defaultConfig {
         applicationId "com.example.fict"
-        minSdkVersion 24
+        minSdkVersion 23
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -17,14 +17,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
+    productFlavors {
+    }
 }
 repositories {
     maven { url 'https://jitpack.io' }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.github.lecho:hellocharts-library:1.5.8@aar'
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'

@@ -11,10 +11,10 @@ import android.widget.Button;
 import com.example.fict.R;
 import com.example.fict.fragments.Day_fragment;
 
-public class Gas extends AppCompatActivity  {
+public class Gas extends AppCompatActivity {
     Day_fragment day_fragment;
 
-    Button day,week,mouth,year;
+    Button day, week, mouth, year;
     Fragment frag1;
     FragmentTransaction fTrans;
 
@@ -25,8 +25,6 @@ public class Gas extends AppCompatActivity  {
         day = findViewById(R.id.day);
         day_fragment = new Day_fragment();
     }
-
-
 
 
 }

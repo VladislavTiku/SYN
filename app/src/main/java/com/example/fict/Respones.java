@@ -21,10 +21,10 @@ class Respones {
     private static final String TAG = "myLogs";
 
     //Variable for saved a answer, json
-    private String RESPONES;
+    private String RESPONSES;
 
     //URL for request
-    private  String urlLastValue = "http://13.53.149.166/sensorlist.php?id=1&rid=1";
+    private String urlLastValue = "http://13.53.149.166/sensorlist.php?id=1&rid=1";
 
 
     /*
@@ -42,19 +42,19 @@ class Respones {
      * Only one not private method
      * @return - Json representations
      */
-    String getRESPONES() {
-        return RESPONES;
+    String getRESPONSES() {
+        return RESPONSES;
 
     }
 
 
     /**
-     * @param RESPONES - set respones.body()string answer in variable
+     * @param RESPONSES - set respones.body()string answer in variable
      *
      */
-    private void setRESPONES(String RESPONES) {
-        this.RESPONES = RESPONES;
-        Log.d(TAG,"RESPONES" + RESPONES);
+    private void setRESPONSES(String RESPONSES) {
+        this.RESPONSES = RESPONSES;
+        Log.d(TAG,"RESPONSES" + RESPONSES);
     }
 
 
@@ -76,10 +76,8 @@ class Respones {
                         .build();
                 try {
                     Response response = client.newCall(request).execute();
-
-
                     assert response.body() != null;
-                    setRESPONES(response.body().string());
+                    setRESPONSES(response.body().string());
 
 
                 } catch (final IOException e) {
